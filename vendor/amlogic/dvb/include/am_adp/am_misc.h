@@ -1,0 +1,119 @@
+/***************************************************************************
+ * Copyright (C) 2017 Amlogic, Inc. All rights reserved.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+ * more details.
+ *
+ * Description:
+ */
+/**\file
+ * \brief Misc tools
+ *
+ * \author Gong Ke <ke.gong@amlogic.com>
+ * \date 2010-08-05: create the document
+ ***************************************************************************/
+
+#ifndef _AM_MISC_H
+#define _AM_MISC_H
+
+#include "am_types.h"
+
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
+/****************************************************************************
+ * Macro definitions
+ ***************************************************************************/
+
+
+/****************************************************************************
+ * Type definitions
+ ***************************************************************************/
+
+/****************************************************************************
+ * API function prototypes  
+ ***************************************************************************/
+
+/**\brief 向一个文件打印字符串
+ * \param[in] name 文件名
+ * \param[in] cmd 向文件打印的字符串
+ * \return
+ *   - AM_SUCCESS 成功
+ *   - 其他值 错误代码
+ */
+extern AM_ErrorCode_t AM_FileEcho(const char *name, const char *cmd);
+
+/**\brief 读取一个文件中的字符串
+ * \param[in] name 文件名
+ * \param[out] buf 存放字符串的缓冲区
+ * \param len 缓冲区大小
+ * \return
+ *   - AM_SUCCESS 成功
+ *   - 其他值 错误代码
+ */
+extern AM_ErrorCode_t AM_FileRead(const char *name, char *buf, int len);
+
+/**\brief 创建本地socket服务
+ * \param[in] name 服务名称
+ * \param[out] fd 返回服务器socket
+ * \return
+ *   - AM_SUCCESS 成功
+ *   - 其他值 错误代码
+ */
+extern AM_ErrorCode_t AM_LocalServer(const char *name, int *fd);
+
+/**\brief 通过本地socket连接到服务
+ * \param[in] name 服务名称
+ * \param[out] fd 返回socket
+ * \return
+ *   - AM_SUCCESS 成功
+ *   - 其他值 错误代码
+ */
+extern AM_ErrorCode_t AM_LocalConnect(const char *name, int *fd);
+
+/**\brief 通过本地socket发送命令
+ * \param fd socket
+ * \param[in] cmd 命令字符串
+ * \return
+ *   - AM_SUCCESS 成功
+ *   - 其他值 错误代码
+ */
+extern AM_ErrorCode_t AM_LocalSendCmd(int fd, const char *cmd);
+
+/**\brief 通过本地socket接收响应字符串
+ * \param fd socket
+ * \param[out] buf 缓冲区
+ * \param len 缓冲区大小
+ * \return
+ *   - AM_SUCCESS 成功
+ *   - 其他值 错误代码
+ */
+extern AM_ErrorCode_t AM_LocalGetResp(int fd, char *buf, int len);
+
+/**\brief 跳过无效UTF8字符
+ * \param[in] src 源字符缓冲区
+ * \param src_len 源字符缓冲区大小
+ * \param[out] dest 目标字符缓冲区
+ * \param[in] dest_len 目标字符缓冲区大小
+ * \return
+ *   - AM_SUCCESS 成功
+ *   - 其他值 错误代码
+ */
+extern AM_ErrorCode_t AM_Check_UTF8(const char *src, int src_len, char *dest, int *dest_len);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif
+
+
